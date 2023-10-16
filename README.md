@@ -4,7 +4,7 @@
 
 ## Documentación
 
-La documentación completa del proyecto, incluyendo APIs y detalles de implementación, está disponible en [Documentación de JavaDoc](doc/index.html).
+La documentación completa del proyecto, incluyendo APIs y detalles de implementación, está disponible en [Documentación de JavaDoc](target/index.html).
 
 ![Captura de pantalla](doc/screenshot.png)
 
