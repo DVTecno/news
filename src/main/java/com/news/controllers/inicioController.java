@@ -35,7 +35,7 @@ public class inicioController {
 	 * @param model El modelo utilizado para pasar datos a la vista.
 	 * @return La vista "inicio.html" que muestra la lista de noticias más recientes y del historial.
 	 */
-	@GetMapping("/") // http://localhost:8080/inicio/
+	@GetMapping("/")
 	public String index(Model model) {
 		// Inicializa una lista de noticias para almacenar las noticias más recientes.
 		List<Noticia> noticias = null;

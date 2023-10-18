@@ -6,15 +6,21 @@ import com.news.repositories.NoticiaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 import java.util.Optional;
+
+import org.springframework.dao.EmptyResultDataAccessException;
+
 /**
  * Servicio para realizar operaciones relacionadas con las noticias.
+ *
  * @version 1.0.0 16/10/2023
  */
 @Service
 public class NoticiaService {
     private final NoticiaRepository noticiaRepository;
+
     /**
      * Constructor que inyecta una instancia de NoticiaRepository en el servicio.
      * @param noticiaRepository El repositorio utilizado para acceder a los datos de las noticias en la base de datos.
@@ -30,12 +36,13 @@ public class NoticiaService {
      * @throws MyException Si no hay noticias disponibles en el sistema. Esto puede ocurrir si no se han publicado noticias todavía.
      */
     public List<Noticia> listarNoticias() throws MyException {
-        List<Noticia> noticias = noticiaRepository.findAll();
+        List<Noticia> noticias = noticiaRepository.findAllByOrderByIdDesc();
         if (noticias.isEmpty()) {
             throw new MyException("No hay noticias disponibles en el sistema.");
         }
         return noticias;
     }
+
     /**
      * <p>Crea una nueva noticia en el sistema.</p>
      *
@@ -44,17 +51,30 @@ public class NoticiaService {
      *   <li><code>titulo</code> - El título de la noticia (obligatorio).</li>
      *   <li><code>cuerpo</code> - El cuerpo de la noticia (obligatorio).</li>
      *   <li><code>urlImagen</code> - La URL de la imagen de la noticia (obligatorio).</li>
-     *   <li><code>descripcion</code> - La descripción opcional de la noticia.</li>
+     *   <li><code>encabezado</code> - El encabezado opcional de la noticia.</li>
+     *   <li><code>primerSubTitulo</code> - El primer subtítulo opcional de la noticia.</li>
+     *   <li><code>segundoSubTitulo</code> - El segundo subtítulo opcional de la noticia.</li>
+     *   <li><code>primerParrafo</code> - El primer párrafo opcional de la noticia.</li>
+     *   <li><code>tercerSubTitulo</code> - El tercer subtítulo opcional de la noticia.</li>
+     *   <li><code>segundoParrafo</code> - El segundo párrafo opcional de la noticia.</li>
      * </ul>
      *
-     * @param titulo El título de la noticia.
-     * @param cuerpo El cuerpo de la noticia.
-     * @param urlImagen La URL de la imagen de la noticia.
-     * @param descripcion La descripción opcional de la noticia.
+     * @param titulo           El título de la noticia.
+     * @param cuerpo           El cuerpo de la noticia.
+     * @param urlImagen        La URL de la imagen de la noticia.
+     * @param encabezado       El encabezado opcional de la noticia.
+     * @param primerSubTitulo  El primer subtítulo opcional de la noticia.
+     * @param segundoSubTitulo El segundo subtítulo opcional de la noticia.
+     * @param primerParrafo    El primer párrafo opcional de la noticia.
+     * @param tercerSubTitulo  El tercer subtítulo opcional de la noticia.
+     * @param segundoParrafo   El segundo párrafo opcional de la noticia.
      * @throws MyException Si no se puede crear la noticia debido a campos obligatorios faltantes.
      */
     @Transactional
-    public void createNoticia(String titulo, String cuerpo, String urlImagen, String descripcion) throws MyException {
+    public void createNoticia(String titulo, String urlImagen, String encabezado,
+                              String primerSubTitulo, String cuerpo,
+                              String segundoSubTitulo, String primerParrafo,
+                              String tercerSubTitulo, String segundoParrafo) throws MyException {
         // Realiza la validación de los campos obligatorios
         if (titulo == null || titulo.isEmpty() || cuerpo == null || cuerpo.isEmpty() || urlImagen == null || urlImagen.isEmpty()) {
             throw new MyException("No se puede crear la noticia: campos obligatorios faltantes");
@@ -67,8 +87,23 @@ public class NoticiaService {
         noticia.setUrlImagen(urlImagen);
 
         // Establece la descripción si no es nula, de lo contrario, deja la descripción como nula en la entidad
-        if (descripcion != null) {
-            noticia.setDescripcion(descripcion);
+        if (encabezado != null) {
+            noticia.setEncabezado(encabezado);
+        }
+        if (primerSubTitulo != null) {
+            noticia.setPrimerSubTitulo(primerSubTitulo);
+        }
+        if (segundoSubTitulo != null) {
+            noticia.setSegundoSubTitulo(segundoSubTitulo);
+        }
+        if (primerParrafo != null) {
+            noticia.setPrimerParrafo(primerParrafo);
+        }
+        if (tercerSubTitulo != null) {
+            noticia.setTercerSubTitulo(tercerSubTitulo);
+        }
+        if (segundoParrafo != null) {
+            noticia.setSegundoParrafo(segundoParrafo);
         }
         noticiaRepository.save(noticia);
     }
@@ -82,7 +117,7 @@ public class NoticiaService {
         if(noticiaRepository.findAll().isEmpty()){
             throw new MyException("No hay noticias disponibles en el sistema.");
         }
-        return noticiaRepository.findAll();
+        return noticiaRepository.findAllByOrderByIdDesc();
     }
     /**
      * Recupera una noticia por su identificador único.
@@ -109,7 +144,7 @@ public class NoticiaService {
         if(noticiaRepository.findAll().isEmpty()){
             throw new MyException("No hay noticias disponibles en el sistema.");
         }
-        return noticiaRepository.findAll();
+        return noticiaRepository.findAllByOrderByIdDesc();
     }
     /**
      * Incrementa el contador de vistas de una noticia por su identificador único.
@@ -133,6 +168,7 @@ public class NoticiaService {
             throw new MyException("No se encontró la noticia con el ID: " + id);
         }
     }
+
     /**
      * Recupera una lista de todas las noticias en el sistema ordenadas por número de vistas en orden descendente.
      *
@@ -142,9 +178,35 @@ public class NoticiaService {
      * @see NoticiaService#incrementarVista(Long)
      */
     public List<Noticia> obtenerTodasLasNoticiasPorVistas() throws MyException {
-        if(noticiaRepository.findAllByOrderByVistaDesc().isEmpty()){
+        if (noticiaRepository.findAllByOrderByVistaDesc().isEmpty()) {
             throw new MyException("No hay noticias disponibles en el sistema.");
         }
         return noticiaRepository.findAllByOrderByVistaDesc();
     }
+
+    /**
+     * Elimina una noticia del sistema basándose en su ID.
+     *
+     * @param id El ID de la noticia a eliminar (no debe ser nulo).
+     * @throws MyException Si ocurre un error durante la eliminación de la noticia o si el ID es nulo.
+     */
+    public void eliminar(Long id) throws MyException {
+
+        // Verifica si el ID es nulo y lanza una excepción si lo es
+        if (id == null) {
+            throw new MyException("No se puede eliminar la noticia: el ID no puede ser nulo");
+        }
+
+        try {
+            // Intenta eliminar la noticia utilizando el repositorio
+            noticiaRepository.deleteById(id);
+        } catch (EmptyResultDataAccessException e) {
+            // Captura la excepción específica que indica que el ID no existe en la base de datos
+            throw new MyException("No se pudo encontrar la noticia con ID " + id + " en la base de datos.");
+        } catch (Exception e) {
+            // Captura cualquier otra excepción que ocurra durante la eliminación y lanza una excepción personalizada
+            throw new MyException("No se pudo eliminar la noticia con ID " + id + ": " + e.getMessage());
+        }
+    }
+
 }

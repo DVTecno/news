@@ -14,132 +14,150 @@ public class Noticia {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String titulo;
-    private String cuerpo;
-    @Column(name = "url_imagen")
     private String urlImagen;
     @Column(columnDefinition = "TEXT")
-    private String descripcion;
+    private String encabezado;
     private Integer vista;
-    /**
-     * Constructor predeterminado que inicializa el contador de vistas en 0.
-     */
+    private String primerSubTitulo;
+    @Column(columnDefinition = "TEXT")
+    private String cuerpo;
+    private String segundoSubTitulo;
+    @Column(columnDefinition = "TEXT")
+    private String primerParrafo;
+    private String tercerSubTitulo;
+    @Column(columnDefinition = "TEXT")
+    private String segundoParrafo;
+
+
     public Noticia() {
         this.vista = 0;
     }
+
     /**
      * Constructor que acepta todos los atributos de la noticia para su inicialización.
-     * @param id Identificador único de la noticia.
-     * @param titulo Título de la noticia.
-     * @param cuerpo Cuerpo o contenido de la noticia.
-     * @param urlImagen URL de la imagen asociada a la noticia.
-     * @param descripcion Descripción opcional de la noticia.
-     * @param vista Contador de vistas de la noticia.
+     *
+     * @param titulo     Título de la noticia.
+     * @param cuerpo     Cuerpo o contenido de la noticia.
+     * @param urlImagen  URL de la imagen asociada a la noticia.
+     * @param encabezado Descripción opcional de la noticia.
+     * @param vista      Contador de vistas de la noticia.
      */
-    public Noticia(Long id, String titulo, String cuerpo, String urlImagen, String descripcion, Integer vista) {
-        this.id = id;
+    public Noticia(String titulo, String urlImagen, String encabezado, Integer vista, String primerSubTitulo, String cuerpo, String segundoSubTitulo, String primerParrafo, String tercerSubTitulo, String segundoParrafo) {
         this.titulo = titulo;
-        this.cuerpo = cuerpo;
         this.urlImagen = urlImagen;
-        this.descripcion = descripcion;
+        this.encabezado = encabezado;
         this.vista = vista;
+        this.primerSubTitulo = primerSubTitulo;
+        this.cuerpo = cuerpo;
+        this.segundoSubTitulo = segundoSubTitulo;
+        this.primerParrafo = primerParrafo;
+        this.tercerSubTitulo = tercerSubTitulo;
+        this.segundoParrafo = segundoParrafo;
     }
-    /**
-     * Obtiene el identificador único de la noticia.
-     * @return El identificador único de la noticia.
-     */
+
+
     public Long getId() {
         return id;
     }
-    /**
-     * Establece el identificador único de la noticia.
-     * @param id El nuevo identificador único de la noticia.
-     */
+
     public void setId(Long id) {
         this.id = id;
     }
-    /**
-     * Obtiene el título de la noticia.
-     * @return El título de la noticia.
-     */
+
     public String getTitulo() {
         return titulo;
     }
-    /**
-     * Establece el título de la noticia.
-     * @param titulo El nuevo título de la noticia.
-     */
+
     public void setTitulo(String titulo) {
         this.titulo = titulo;
     }
-    /**
-     * Obtiene el cuerpo o contenido de la noticia.
-     * @return El cuerpo o contenido de la noticia.
-     */
-    public String getCuerpo() {
-        return cuerpo;
-    }
-    /**
-     * Establece el cuerpo o contenido de la noticia.
-     * @param cuerpo El nuevo cuerpo o contenido de la noticia.
-     */
-    public void setCuerpo(String cuerpo) {
-        this.cuerpo = cuerpo;
-    }
-    /**
-     * Obtiene la URL de la imagen asociada a la noticia.
-     * @return La URL de la imagen de la noticia.
-     */
+
     public String getUrlImagen() {
         return urlImagen;
     }
-    /**
-     * Establece la URL de la imagen asociada a la noticia.
-     * @param urlImagen La nueva URL de la imagen de la noticia.
-     */
+
     public void setUrlImagen(String urlImagen) {
         this.urlImagen = urlImagen;
     }
-    /**
-     * Establece la descripción opcional de la noticia.
-     * @param descripcion La nueva descripción opcional de la noticia.
-     */
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+
+    public String getEncabezado() {
+        return encabezado;
     }
-    /**
-     * Obtiene la descripción opcional de la noticia.
-     * @return La descripción opcional de la noticia.
-     */
-    public String getDescripcion() {
-        return descripcion;
+
+    public void setEncabezado(String encabezado) {
+        this.encabezado = encabezado;
     }
-    /**
-     * Obtiene el contador de vistas de la noticia.
-     * @return El contador de vistas de la noticia.
-     */
-public Integer getVista() {
+
+    public Integer getVista() {
         return vista;
     }
-    /**
-     * Establece el contador de vistas de la noticia.
-     * @param vista El nuevo contador de vistas de la noticia.
-     */
+
     public void setVista(Integer vista) {
         this.vista = vista;
     }
-    /**
-     * Representación en cadena de texto de la noticia.
-     * @return Una cadena que representa la noticia con sus atributos.
-     */
+
+    public String getPrimerSubTitulo() {
+        return primerSubTitulo;
+    }
+
+    public void setPrimerSubTitulo(String primerSubTitulo) {
+        this.primerSubTitulo = primerSubTitulo;
+    }
+
+    public String getCuerpo() {
+        return cuerpo;
+    }
+
+    public void setCuerpo(String cuerpo) {
+        this.cuerpo = cuerpo;
+    }
+
+    public String getSegundoSubTitulo() {
+        return segundoSubTitulo;
+    }
+
+    public void setSegundoSubTitulo(String segundoSubTitulo) {
+        this.segundoSubTitulo = segundoSubTitulo;
+    }
+
+    public String getPrimerParrafo() {
+        return primerParrafo;
+    }
+
+    public void setPrimerParrafo(String primerParrafo) {
+        this.primerParrafo = primerParrafo;
+    }
+
+    public String getTercerSubTitulo() {
+        return tercerSubTitulo;
+    }
+
+    public void setTercerSubTitulo(String tercerSubTitulo) {
+        this.tercerSubTitulo = tercerSubTitulo;
+    }
+
+    public String getSegundoParrafo() {
+        return segundoParrafo;
+    }
+
+    public void setSegundoParrafo(String segundoParrafo) {
+        this.segundoParrafo = segundoParrafo;
+    }
+
     @Override
     public String toString() {
         return "Noticia{" +
                 "id=" + id +
-                ", título='" + titulo + '\'' +
-                ", cuerpo='" + cuerpo + '\'' +
+                ", titulo='" + titulo + '\'' +
                 ", urlImagen='" + urlImagen + '\'' +
-                ", descripción='" + descripcion + '\'' +
+                ", encabezado='" + encabezado + '\'' +
                 ", vista=" + vista +
+                ", primerSubTitulo='" + primerSubTitulo + '\'' +
+                ", cuerpo='" + cuerpo + '\'' +
+                ", segundoSubTitulo='" + segundoSubTitulo + '\'' +
+                ", primerParrafo='" + primerParrafo + '\'' +
+                ", tercerSubTitulo='" + tercerSubTitulo + '\'' +
+                ", segundoParrafo='" + segundoParrafo + '\'' +
                 '}';
     }
 }

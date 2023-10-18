@@ -9,6 +9,7 @@
     <link rel="icon" href="/img/favicon.png" type="image/png" sizes="48x48">
     <title>Panel Admin</title>
 </head>
+<body>
 <div class="top-bar bg-custom">
     <div class="container-fluid text-white py-2">
         <div class="container">
@@ -55,27 +56,107 @@
         </div>
     </div>
 </header>
-<div class="container mt-3">
-    <div class="card-body w-50 mx-auto">
+<div class="container mt-4">
+    <div class="card-body w-100 mx-auto shadow-lg p-1">
         <div class="card">
             <div class="container mt-5">
                 <div class="row">
-                    <div class="col-md-6 mx-auto mb-4">
-                        <h1 class="mb-4">Editar Noticia</h1>
-                        <form th:action="@{/editar-noticia/{id}(id=${idDeLaNoticia})}" method="post">
-                            <div class="mb-3">
-                                <label for="titulo" class="form-label">Título de la Noticia</label>
-                                <input type="text" class="form-control" id="titulo" name="tituloDeLaNoticia" value="${tituloDeLaNoticia}" required>
+                    <div class="col-md-10 mx-auto mb-4">
+                        <div th:if="${exito}" class="alert alert-success text-center">
+                            <p th:text="${exito}"></p>
+                        </div>
+                        <div th:if="${error}" class="alert alert-danger text-center">
+                            <p th:text="${error}"></p>
+                        </div>
+
+                        <form action="/noticias/registrar" method="POST" class="mt-5">
+                            <h3 class="text-center mb-5">Editar Noticia</h3>
+                            <!-- Sección 1: Detalles Principales -->
+                            <div>
+                                <div class="row justify-content-center">
+                                    <div class="col-md-4">
+                                        <div class="mb-3">
+                                            <label for="urlImagen" class="form-label">URL de la Imagen:</label>
+                                            <input type="text" class="form-control shadow-sm" id="urlImagen"
+                                                   name="urlImagen">
+                                            <img id="imagenPrevia" class="mt-3 img-thumbnail ms-2" src="#"
+                                                 alt="Vista previa de la imagen" style="max-width: 15%; display: none;">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="mb-3">
+                                            <label for="titulo" class="form-label">Título:</label>
+                                            <input type="text" class="form-control shadow-sm" id="titulo" name="titulo">
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="mb-3">
-                                <label for="cuerpo" class="form-label">Cuerpo de la Noticia</label>
-                                <textarea class="form-control" id="cuerpo" name="cuerpoDeLaNoticia" rows="5" required>${cuerpoDeLaNoticia}</textarea>
+                            <label for="encabezado" class="form-label">Encabezado:</label>
+                            <textarea class="form-control shadow-sm mb-3" id="encabezado" name="encabezado"
+                                      rows="4"></textarea>
+                            <hr class="bg-custom">
+                            <!-- Sección 2: Detalles Adicionales -->
+                            <div class="mb-4">
+                                <div>
+                                    <div class="row justify-content-center">
+                                        <div class="col-md-5">
+                                            <div class="mb-3">
+                                                <label for="primeSubTitulo" class="form-label">Primer Sub
+                                                    Título:</label>
+                                                <input type="text" class="form-control shadow-sm mb-3"
+                                                       id="primeSubTitulo" name="primeSubTitulo">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-7">
+                                            <div class="mb-3">
+                                                <label for="cuerpo" class="form-label">Cuerpo:</label>
+                                                <textarea class="form-control shadow-sm mb-3" id="cuerpo" name="cuerpo"
+                                                          rows="5"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="row justify-content-center">
+                                        <div class="col-md-5">
+                                            <div class="mb-3">
+                                                <label for="segundoSubTitulo" class="form-label">Segundo Sub
+                                                    Título:</label>
+                                                <input type="text" class="form-control shadow-sm mb-3"
+                                                       id="segundoSubTitulo" name="segundoSubTitulo">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-7">
+                                            <div class="mb-3">
+                                                <label for="parrafo" class="form-label">Primer Párrafo:</label>
+                                                <textarea class="form-control shadow-sm mb-3" id="parrafo"
+                                                          name="parrafo" rows="5"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="row justify-content-center">
+                                        <div class="col-md-5">
+                                            <div class="mb-3">
+                                                <label for="tercerSubTitulo" class="form-label">Tercer Sub
+                                                    Título:</label>
+                                                <input type="text" class="form-control shadow-sm mb-3 "
+                                                       id="tercerSubTitulo" name="tercerSubTitulo">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-7">
+                                            <div class="mb-3">
+                                                <label for="segundoParrafo" class="form-label">Segundo Párrafo:</label>
+                                                <textarea class="form-control shadow-sm mb-3" id="segundoParrafo"
+                                                          name="segundoParrafo" rows="5"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="mb-3">
-                                <label for="imagen" class="form-label">URL de la Imagen</label>
-                                <input type="text" class="form-control" id="imagen" name="urlImagenDeFondo" value="${urlImagenDeFondo}" required>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                            <button type="submit" class="btn btn-danger shadow transition-hover">Publicar Noticia
+                            </button>
                         </form>
                     </div>
                 </div>
@@ -83,6 +164,7 @@
         </div>
     </div>
 </div>
+
 <footer class="footer bg-custom text-white text-center mt-5">
     <div class="container">
         <div class="row justify-content-center p-2 pb-1 text-white">

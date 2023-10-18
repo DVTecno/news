@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"com.news"},{"l":"com.news.controllers"},{"l":"com.news.entity"},{"l":"com.news.exceptions"},{"l":"com.news.repositories"},{"l":"com.news.services"}];updateSearchResults();

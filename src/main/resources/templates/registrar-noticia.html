@@ -10,11 +10,13 @@
     <link rel="icon" href="/img/favicon.png" type="image/png" sizes="48x48">
     <title>Publicar Noticia</title>
 </head>
+<body>
 <div class="top-bar bg-custom">
     <div class="container-fluid text-white py-2">
         <div class="container">
             <h6 class="display-6">Publicar Noticias</h6>
-            <p class="lead">Descubre, Crea y Comparte Historias que Iluminan el Mundo. Bienvenido a tu Centro de Noticias</p>
+            <p class="lead">Descubre, Crea y Comparte Historias que Iluminan el Mundo. Bienvenido a tu Centro de
+                Noticias</p>
         </div>
     </div>
 </div>
@@ -63,34 +65,108 @@
     </div>
 
 </header>
+
 <div class="container mt-4">
     <div class="card-body w-100 mx-auto shadow-lg p-1">
         <div class="card">
             <div class="container mt-5">
                 <div class="row">
                     <div class="col-md-10 mx-auto mb-4">
+                        <div th:if="${exito}" class="alert alert-success text-center">
+                            <p th:text="${exito}"></p>
+                        </div>
+                        <div th:if="${error}" class="alert alert-danger text-center">
+                            <p th:text="${error}"></p>
+                        </div>
+
                         <form action="/noticias/registrar" method="POST" class="mt-5">
-                            <h3 class="text-center mb-4">Registrar Noticia</h3>
-                            <div class="mb-3">
-                                <label for="titulo" class="form-label">Título:</label>
-                                <input type="text" class="form-control shadow-sm" id="titulo" name="titulo" required>
+                            <h3 class="text-center mb-5">Registrar Noticia</h3>
+                            <!-- Sección 1: Detalles Principales -->
+                            <div>
+                                <div class="row justify-content-center">
+                                    <div class="col-md-4">
+                                        <div class="mb-3">
+                                            <label for="urlImagen" class="form-label">URL de la Imagen:</label>
+                                            <input type="text" class="form-control shadow-sm" id="urlImagen"
+                                                   name="urlImagen" maxlength="255">
+                                            <img id="imagenPrevia" class="mt-3 img-thumbnail ms-2" src="#"
+                                                 alt="Vista previa de la imagen" style="max-width: 15%; display: none;">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="mb-3">
+                                            <label for="titulo" class="form-label">Título:</label>
+                                            <input type="text" class="form-control shadow-sm" id="titulo" name="titulo">
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="mb-3">
-                                <label for="cuerpo" class="form-label">Cuerpo:</label>
-                                <textarea class="form-control shadow-sm" id="cuerpo" name="cuerpo" rows="2" required></textarea>
+                            <label for="encabezado" class="form-label">Encabezado:</label>
+                            <textarea class="form-control shadow-sm mb-3" id="encabezado" name="encabezado"
+                                      rows="4"></textarea>
+                            <hr class="bg-custom">
+                            <!-- Sección 2: Detalles Adicionales -->
+                            <div class="mb-4">
+                                <div>
+                                    <div class="row justify-content-center">
+                                        <div class="col-md-5">
+                                            <div class="mb-3">
+                                                <label for="primerSubTitulo" class="form-label">Primer Sub
+                                                    Título:</label>
+                                                <input type="text" class="form-control shadow-sm mb-3"
+                                                       id="primerSubTitulo" name="primerSubTitulo">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-7">
+                                            <div class="mb-3">
+                                                <label for="cuerpo" class="form-label">Cuerpo:</label>
+                                                <textarea class="form-control shadow-sm mb-3" id="cuerpo" name="cuerpo"
+                                                          rows="5"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="row justify-content-center">
+                                        <div class="col-md-5">
+                                            <div class="mb-3">
+                                                <label for="segundoSubTitulo" class="form-label">Segundo Sub
+                                                    Título:</label>
+                                                <input type="text" class="form-control shadow-sm mb-3"
+                                                       id="segundoSubTitulo" name="segundoSubTitulo">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-7">
+                                            <div class="mb-3">
+                                                <label for="parrafo" class="form-label">Primer Párrafo:</label>
+                                                <textarea class="form-control shadow-sm mb-3" id="parrafo"
+                                                          name="parrafo" rows="5"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="row justify-content-center">
+                                        <div class="col-md-5">
+                                            <div class="mb-3">
+                                                <label for="tercerSubTitulo" class="form-label">Tercer Sub
+                                                    Título:</label>
+                                                <input type="text" class="form-control shadow-sm mb-3 "
+                                                       id="tercerSubTitulo" name="tercerSubTitulo">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-7">
+                                            <div class="mb-3">
+                                                <label for="segundoParrafo" class="form-label">Segundo Párrafo:</label>
+                                                <textarea class="form-control shadow-sm mb-3" id="segundoParrafo"
+                                                          name="segundoParrafo" rows="5"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="mb-3">
-                                <label for="urlImagen" class="form-label">URL de la Imagen:</label>
-                                <input type="text" class="form-control shadow-sm" id="urlImagen" name="urlImagen" required>
-                                <img id="imagenPrevia" class="mt-3 img-thumbnail" src="#" alt="Vista previa de la imagen" style="max-width: 15%; display: none;">
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="descripcion" class="form-label">Descripción:</label>
-                                <textarea class="form-control shadow-sm" id="descripcion" name="descripcion" rows="5" required></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-primary shadow transition-hover ">Publicar Noticia</button>
-
+                            <button type="submit" class="btn btn-danger shadow transition-hover">Publicar Noticia
+                            </button>
                         </form>
                     </div>
                 </div>

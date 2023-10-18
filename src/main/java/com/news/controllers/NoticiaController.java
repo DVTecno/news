@@ -144,7 +144,7 @@ public class NoticiaController {
 			return "registrar-noticia.html";
 		}
 		// Si la noticia se crea correctamente, redirige al usuario a la página de inicio.
-		return "redirect:/inicio/";
+		return "redirect:/inicio.html/";
 	}
 
 

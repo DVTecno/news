@@ -9,6 +9,7 @@
     <link rel="icon" href="/img/favicon.png" type="image/png" sizes="48x48">
     <title>Panel Admin</title>
 </head>
+<body>
 <div class="top-bar bg-custom">
     <div class="container-fluid text-white py-2">
         <div class="container">
@@ -62,27 +63,27 @@
                 <p th:text="${mensaje}" class="alert alert-info"></p>
             </div>
             <div th:unless="${mensaje}">
-            <table class="table">
-                <thead>
-                <tr class="table-dark">
-                    <th scope="col" class="w-25">Título</th>
-                    <th scope="col" class="w-50">Cuerpo</th>
-                    <th scope="col" class="w-25">Acciones</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="noticia : ${noticias}">
-                    <td class="w-25 text-truncate table-primary" th:text="${noticia.titulo}"></td>
-                    <td class="w-50 text-truncate table-secondary" th:text="${noticia.cuerpo}"></td>
-                    <td class="w-25">
-                        <!-- Enlace para Editar Noticia -->
-                        <a th:href="@{/editar-noticias/{id}(id=${noticia.id})}" class="btn btn-primary btn-sm"><i class="bi bi-pencil-fill"></i> Editar</a>
-                        <!-- Enlace para Eliminar Noticia -->
-                        <a th:href="@{/eliminar-noticias/{id}(id=${noticia.id})}" class="btn btn-danger btn-sm"><i class="bi bi-trash3-fill"></i> Eliminar</a>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
+                <table class="table">
+                    <thead>
+                    <tr class="table-dark">
+                        <th scope="col" class="w-25">Título</th>
+                        <th scope="col" class="w-50">Cuerpo</th>
+                        <th scope="col" class="w-25">Acciones</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="noticia : ${noticias}">
+                        <td class="w-25 text-truncate table-primary" th:text="${noticia.titulo}"></td>
+                        <td class="w-50 text-truncate table-secondary" th:text="${noticia.cuerpo}"></td>
+                        <td class="w-25">
+                            <!-- Enlace para Editar Noticia -->
+                            <a th:href="@{/editar-noticias/{id}(id=${noticia.id})}" class="btn btn-primary btn-sm"><i class="bi bi-pencil-fill"></i> Editar</a>
+                            <!-- Enlace para Eliminar Noticia -->
+                            <a th:href="@{/eliminar-noticias/{id}(id=${noticia.id})}" class="btn btn-danger btn-sm"><i class="bi bi-trash3-fill"></i> Eliminar</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
